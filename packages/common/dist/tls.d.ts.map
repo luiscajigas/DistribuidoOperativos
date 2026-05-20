@@ -1,0 +1,1 @@
+{"version":3,"file":"tls.d.ts","sourceRoot":"","sources":["../src/tls.ts"],"names":[],"mappings":"AAEA,MAAM,MAAM,eAAe,GAAG;IAC5B,EAAE,CAAC,EAAE,MAAM,CAAC;IACZ,IAAI,CAAC,EAAE,MAAM,CAAC;IACd,GAAG,CAAC,EAAE,MAAM,CAAC;IACb,kBAAkB,CAAC,EAAE,OAAO,CAAC;CAC9B,CAAC;AAEF,wBAAgB,oBAAoB,CAAC,MAAM,EAAE,MAAM,GAAG,eAAe,CAapE"}
