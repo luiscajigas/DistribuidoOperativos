@@ -2,6 +2,27 @@
   hosts: all
   become: true
   tasks:
+
+- name: Kill unattended-upgrades
+      ansible.builtin.shell: |
+        systemctl stop unattended-upgrades || true
+        systemctl kill --kill-who=all unattended-upgrades || true
+        killall -9 unattended-upgrade || true
+        killall -9 python3.14 || true
+        rm -f /var/lib/apt/lists/lock
+        rm -f /var/cache/apt/archives/lock
+        rm -f /var/lib/dpkg/lock*
+        dpkg --configure -a || true
+      changed_when: false
+
+    - name: Wait for apt to be free
+      ansible.builtin.shell: |
+        while fuser /var/lib/apt/lists/lock /var/lib/dpkg/lock* >/dev/null 2>&1; do
+          sleep 3
+        done
+      changed_when: false
+      timeout: 120
+
     - name: Install packages
       ansible.builtin.apt:
         update_cache: true
