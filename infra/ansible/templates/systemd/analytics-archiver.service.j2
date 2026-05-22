@@ -1,0 +1,16 @@
+[Unit]
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm --name analytics-archiver --network host \
+  --env-file /opt/zero-trust/services/analytics-archiver/service.env \
+  -v /opt/zero-trust/certs:/certs:ro \
+  -v /opt/zero-trust/archive:/opt/zero-trust/archive \
+  zt/analytics-archiver:local
+ExecStop=/usr/bin/docker stop analytics-archiver
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
